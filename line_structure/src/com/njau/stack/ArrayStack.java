@@ -49,8 +49,8 @@ public class ArrayStack {
 
   public void list() {
     if (!isEmpty()) {
-      for (int i : stack) {
-        System.out.println(i);
+      for (int i = top; i >= 0; i--) {
+        System.out.println(stack[i]);
       }
     } else {
       throw new RuntimeException("堆栈为空！");
