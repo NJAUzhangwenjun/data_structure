@@ -1,0 +1,710 @@
+--------------------------------------------------------------------------------
+概述  软件包   类  使用  树  已过时  索引  帮助
+ JavaTM Platform
+Standard Ed. 6
+ 上一个类   下一个类 框架    无框架
+摘要： 嵌套 | 字段 | 构造方法 | 方法 详细信息： 字段 | 构造方法 | 方法
+
+--------------------------------------------------------------------------------
+
+java.io
+类 FileInputStream
+java.lang.Object
+  继承者 java.io.InputStream
+      继承者 java.io.FileInputStream
+所有已实现的接口：
+Closeable
+
+--------------------------------------------------------------------------------
+
+public class FileInputStreamextends InputStreamFileInputStream 从文件系统中的某个文件中获得输入字节。哪些文件可用取决于主机环境。
+
+FileInputStream 用于读取诸如图像数据之类的原始字节流。要读取字符流，请考虑使用 FileReader。
+
+
+
+从以下版本开始：
+JDK1.0
+另请参见：
+File, FileDescriptor, FileOutputStream
+
+--------------------------------------------------------------------------------
+
+构造方法摘要
+FileInputStream(File file)
+          通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的 File 对象 file 指定。
+FileInputStream(FileDescriptor fdObj)
+          通过使用文件描述符 fdObj 创建一个 FileInputStream，该文件描述符表示到文件系统中某个实际文件的现有连接。
+FileInputStream(String name)
+          通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的路径名 name 指定。
+  方法摘要
+ int available()
+          返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数。
+ void close()
+          关闭此文件输入流并释放与此流有关的所有系统资源。
+protected  void finalize()
+          确保在不再引用文件输入流时调用其 close 方法。
+ FileChannel getChannel()
+          返回与此文件输入流有关的唯一 FileChannel 对象。
+ FileDescriptor getFD()
+          返回表示到文件系统中实际文件的连接的 FileDescriptor 对象，该文件系统正被此 FileInputStream 使用。
+ int read()
+          从此输入流中读取一个数据字节。
+ int read(byte[] b)
+          从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中。
+ int read(byte[] b, int off, int len)
+          从此输入流中将最多 len 个字节的数据读入一个 byte 数组中。
+ long skip(long n)
+          从输入流中跳过并丢弃 n 个字节的数据。
+  从类 java.io.InputStream 继承的方法
+mark, markSupported, reset
+  从类 java.lang.Object 继承的方法
+clone, equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait
+
+
+构造方法详细信息
+
+
+FileInputStream
+public FileInputStream(String name)
+                throws FileNotFoundException通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的路径名 name 指定。创建一个新 FileDescriptor 对象来表示此文件连接。
+首先，如果有安全管理器，则用 name 作为参数调用其 checkRead 方法。
+
+如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException。
+
+
+参数：
+name - 与系统有关的文件名。
+抛出：
+FileNotFoundException - 如果该文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取。
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件进行读取访问。
+另请参见：
+SecurityManager.checkRead(java.lang.String)
+
+--------------------------------------------------------------------------------
+
+FileInputStream
+public FileInputStream(File file)
+                throws FileNotFoundException通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的 File 对象 file 指定。创建一个新 FileDescriptor 对象来表示此文件连接。
+首先，如果有安全管理器，则用 file 参数表示的路径作为参数调用其 checkRead 方法。
+
+如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException。
+
+
+参数：
+file - 为了进行读取而打开的文件。
+抛出：
+FileNotFoundException - 如果该文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取。
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件进行读取访问。
+另请参见：
+File.getPath(), SecurityManager.checkRead(java.lang.String)
+
+--------------------------------------------------------------------------------
+
+FileInputStream
+public FileInputStream(FileDescriptor fdObj)通过使用文件描述符 fdObj 创建一个 FileInputStream，该文件描述符表示到文件系统中某个实际文件的现有连接。
+首先，如果有安全管理器，则用文件描述符 fdObj 作为参数调用其 checkRead 方法，以查看它是否可以读取该文件描述符。如果拒绝对该文件描述符进行读取访问，则抛出 SecurityException。
+
+如果 fdObj 为 null，则抛出 NullPointerException。
+
+
+参数：
+fdObj - 为了进行读取而打开的文件描述符。
+抛出：
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件描述符进行读取访问
+另请参见：
+SecurityManager.checkRead(java.io.FileDescriptor)
+方法详细信息
+
+read
+public int read()
+         throws IOException从此输入流中读取一个数据字节。如果没有输入可用，则此方法将阻塞。
+
+指定者：
+类 InputStream 中的 read
+返回：
+下一个数据字节；如果已到达文件末尾，则返回 -1。
+抛出：
+IOException - 如果发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+read
+public int read(byte[] b)
+         throws IOException从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中。在某些输入可用之前，此方法将阻塞。
+
+覆盖：
+类 InputStream 中的 read
+参数：
+b - 存储读取数据的缓冲区。
+返回：
+读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+抛出：
+IOException - 如果发生 I/O 错误。
+另请参见：
+InputStream.read(byte[], int, int)
+
+--------------------------------------------------------------------------------
+
+read
+public int read(byte[] b,
+                int off,
+                int len)
+         throws IOException从此输入流中将最多 len 个字节的数据读入一个 byte 数组中。如果 len 不为 0，则在输入可用之前，该方法将阻塞；否则，不读取任何字节并返回 0。
+
+覆盖：
+类 InputStream 中的 read
+参数：
+b - 存储读取数据的缓冲区。
+off - 目标数组 b 中的起始偏移量。
+len - 读取的最大字节数。
+返回：
+读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+抛出：
+NullPointerException - 如果 b 为 null。
+IndexOutOfBoundsException - 如果 off 为负、len 为负，或者 len 大于 b.length - off
+IOException - 如果发生 I/O 错误。
+另请参见：
+InputStream.read()
+
+--------------------------------------------------------------------------------
+
+skip
+public long skip(long n)
+          throws IOException从输入流中跳过并丢弃 n 个字节的数据。
+出于各种原因，skip 方法最终跳过的字节数可能更少一些，甚至可能为 0。如果 n 为负，则抛出 IOException，即使 InputStream 超类的 skip 方法在这种情况下没有执行任何操作。返回实际跳过的字节数。
+
+此方法跳过的字节可能多于底层实现文件中剩余的字节。这--------------------------------------------------------------------------------
+概述  软件包   类  使用  树  已过时  索引  帮助
+ JavaTM Platform
+Standard Ed. 6
+ 上一个类   下一个类 框架    无框架
+摘要： 嵌套 | 字段 | 构造方法 | 方法 详细信息： 字段 | 构造方法 | 方法
+
+--------------------------------------------------------------------------------
+
+java.io
+类 FileInputStream
+java.lang.Object
+  继承者 java.io.InputStream
+      继承者 java.io.FileInputStream
+所有已实现的接口：
+Closeable
+
+--------------------------------------------------------------------------------
+
+public class FileInputStreamextends InputStreamFileInputStream 从文件系统中的某个文件中获得输入字节。哪些文件可用取决于主机环境。
+
+FileInputStream 用于读取诸如图像数据之类的原始字节流。要读取字符流，请考虑使用 FileReader。
+
+
+
+从以下版本开始：
+JDK1.0
+另请参见：
+File, FileDescriptor, FileOutputStream
+
+--------------------------------------------------------------------------------
+
+构造方法摘要
+FileInputStream(File file)
+          通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的 File 对象 file 指定。
+FileInputStream(FileDescriptor fdObj)
+          通过使用文件描述符 fdObj 创建一个 FileInputStream，该文件描述符表示到文件系统中某个实际文件的现有连接。
+FileInputStream(String name)
+          通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的路径名 name 指定。
+  方法摘要
+ int available()
+          返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数。
+ void close()
+          关闭此文件输入流并释放与此流有关的所有系统资源。
+protected  void finalize()
+          确保在不再引用文件输入流时调用其 close 方法。
+ FileChannel getChannel()
+          返回与此文件输入流有关的唯一 FileChannel 对象。
+ FileDescriptor getFD()
+          返回表示到文件系统中实际文件的连接的 FileDescriptor 对象，该文件系统正被此 FileInputStream 使用。
+ int read()
+          从此输入流中读取一个数据字节。
+ int read(byte[] b)
+          从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中。
+ int read(byte[] b, int off, int len)
+          从此输入流中将最多 len 个字节的数据读入一个 byte 数组中。
+ long skip(long n)
+          从输入流中跳过并丢弃 n 个字节的数据。
+  从类 java.io.InputStream 继承的方法
+mark, markSupported, reset
+  从类 java.lang.Object 继承的方法
+clone, equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait
+
+
+构造方法详细信息
+
+
+FileInputStream
+public FileInputStream(String name)
+                throws FileNotFoundException通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的路径名 name 指定。创建一个新 FileDescriptor 对象来表示此文件连接。
+首先，如果有安全管理器，则用 name 作为参数调用其 checkRead 方法。
+
+如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException。
+
+
+参数：
+name - 与系统有关的文件名。
+抛出：
+FileNotFoundException - 如果该文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取。
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件进行读取访问。
+另请参见：
+SecurityManager.checkRead(java.lang.String)
+
+--------------------------------------------------------------------------------
+
+FileInputStream
+public FileInputStream(File file)
+                throws FileNotFoundException通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的 File 对象 file 指定。创建一个新 FileDescriptor 对象来表示此文件连接。
+首先，如果有安全管理器，则用 file 参数表示的路径作为参数调用其 checkRead 方法。
+
+如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException。
+
+
+参数：
+file - 为了进行读取而打开的文件。
+抛出：
+FileNotFoundException - 如果该文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取。
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件进行读取访问。
+另请参见：
+File.getPath(), SecurityManager.checkRead(java.lang.String)
+
+--------------------------------------------------------------------------------
+
+FileInputStream
+public FileInputStream(FileDescriptor fdObj)通过使用文件描述符 fdObj 创建一个 FileInputStream，该文件描述符表示到文件系统中某个实际文件的现有连接。
+首先，如果有安全管理器，则用文件描述符 fdObj 作为参数调用其 checkRead 方法，以查看它是否可以读取该文件描述符。如果拒绝对该文件描述符进行读取访问，则抛出 SecurityException。
+
+如果 fdObj 为 null，则抛出 NullPointerException。
+
+
+参数：
+fdObj - 为了进行读取而打开的文件描述符。
+抛出：
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件描述符进行读取访问
+另请参见：
+SecurityManager.checkRead(java.io.FileDescriptor)
+方法详细信息
+
+read
+public int read()
+         throws IOException从此输入流中读取一个数据字节。如果没有输入可用，则此方法将阻塞。
+
+指定者：
+类 InputStream 中的 read
+返回：
+下一个数据字节；如果已到达文件末尾，则返回 -1。
+抛出：
+IOException - 如果发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+read
+public int read(byte[] b)
+         throws IOException从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中。在某些输入可用之前，此方法将阻塞。
+
+覆盖：
+类 InputStream 中的 read
+参数：
+b - 存储读取数据的缓冲区。
+返回：
+读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+抛出：
+IOException - 如果发生 I/O 错误。
+另请参见：
+InputStream.read(byte[], int, int)
+
+--------------------------------------------------------------------------------
+
+read
+public int read(byte[] b,
+                int off,
+                int len)
+         throws IOException从此输入流中将最多 len 个字节的数据读入一个 byte 数组中。如果 len 不为 0，则在输入可用之前，该方法将阻塞；否则，不读取任何字节并返回 0。
+
+覆盖：
+类 InputStream 中的 read
+参数：
+b - 存储读取数据的缓冲区。
+off - 目标数组 b 中的起始偏移量。
+len - 读取的最大字节数。
+返回：
+读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+抛出：
+NullPointerException - 如果 b 为 null。
+IndexOutOfBoundsException - 如果 off 为负、len 为负，或者 len 大于 b.length - off
+IOException - 如果发生 I/O 错误。
+另请参见：
+InputStream.read()
+
+--------------------------------------------------------------------------------
+
+skip
+public long skip(long n)
+          throws IOException从输入流中跳过并丢弃 n 个字节的数据。
+出于各种原因，skip 方法最终跳过的字节数可能更少一些，甚至可能为 0。如果 n 为负，则抛出 IOException，即使 InputStream 超类的 skip 方法在这种情况下没有执行任何操作。返回实际跳过的字节数。
+
+此方法跳过的字节可能多于底层实现文件中剩余的字节。这不会产生异常，并且跳过的字节数可能包括底层实现文件的 EOF（文件结束符）之后的一些字节数。如果试图在跳过末尾之后读取流，那么会返回 -1（指示文件结束）。
+
+
+覆盖：
+类 InputStream 中的 skip
+参数：
+n - 要跳过的字节数。
+返回：
+实际跳过的字节数。
+抛出：
+IOException - 如果 n 为负，如果该流不支持查找操作，或者发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+available
+public int available()
+              throws IOException返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数。下一次调用可能是同一个线程，也可能是另一个线程。一次读取或跳过此数量个字节不会发生阻塞，但读取或跳过的字节可能小于该数。
+在某些情况下，非阻塞的读取（或跳过）操作在执行很慢时看起来受阻塞，例如，在网速缓慢的网络上读取大文件时。
+
+
+覆盖：
+类 InputStream 中的 available
+返回：
+可以不受阻塞地从此输入流中读取（或跳过）的估计剩余字节数。
+抛出：
+IOException - 如果此文件输入流已通过调用 close 关闭，或者发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+close
+public void close()
+           throws IOException关闭此文件输入流并释放与此流有关的所有系统资源。
+如果此流有一个与之关联的通道，则关闭该通道。
+
+
+指定者：
+接口 Closeable 中的 close
+覆盖：
+类 InputStream 中的 close
+抛出：
+IOException - 如果发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+getFD
+public final FileDescriptor getFD()
+                           throws IOException返回表示到文件系统中实际文件的连接的 FileDescriptor 对象，该文件系统正被此 FileInputStream 使用。
+
+返回：
+与此流有关的文件描述符对象。
+抛出：
+IOException - 如果发生 I/O 错误。
+另请参见：
+FileDescriptor
+
+--------------------------------------------------------------------------------
+
+getChannel
+public FileChannel getChannel()返回与此文件输入流有关的唯一 FileChannel 对象。
+所返回通道的初始 position 将等于到目前为止从文件中读取的字节数。从此流中读取的字节会使通道的位置递增。显式地或通过读取来更改通道的位置会更改此流的文件位置。
+
+
+返回：
+与此文件输入流有关的文件通道
+从以下版本开始：
+1.4
+
+--------------------------------------------------------------------------------
+
+finalize
+protected void finalize()
+                 throws IOException确保在不再引用文件输入流时调用其 close 方法。
+
+覆盖：
+类 Object 中的 finalize
+抛出：
+IOException - 如果发生 I/O 错误。
+另请参见：
+close()
+
+--------------------------------------------------------------------------------
+概述  软件包   类  使用  树  已过时  索引  帮助
+ JavaTM Platform
+Standard Ed. 6
+ 上一个类   下一个类 框架    无框架
+摘要： 嵌套 | 字段 | 构造方法 | 方法 详细信息： 字段 | 构造方法 | 方法
+
+--------------------------------------------------------------------------------
+提交错误或意见
+有关更多的 API 参考资料和开发人员文档，请参阅 Java SE 开发人员文档。该文档包含更详细的、面向开发人员的描述，以及总体概述、术语定义、使用技巧和工作代码示例。
+版权所有 2007 Sun Microsystems, Inc. 保留所有权利。 请遵守许可证条款。另请参阅文档重新分发政策。
+--------------------------------------------------------------------------------
+概述  软件包   类  使用  树  已过时  索引  帮助
+ JavaTM Platform
+Standard Ed. 6
+ 上一个类   下一个类 框架    无框架
+摘要： 嵌套 | 字段 | 构造方法 | 方法 详细信息： 字段 | 构造方法 | 方法
+
+--------------------------------------------------------------------------------
+
+java.io
+类 FileInputStream
+java.lang.Object
+  继承者 java.io.InputStream
+      继承者 java.io.FileInputStream
+所有已实现的接口：
+Closeable
+
+--------------------------------------------------------------------------------
+
+public class FileInputStreamextends InputStreamFileInputStream 从文件系统中的某个文件中获得输入字节。哪些文件可用取决于主机环境。
+
+FileInputStream 用于读取诸如图像数据之类的原始字节流。要读取字符流，请考虑使用 FileReader。
+
+
+
+从以下版本开始：
+JDK1.0
+另请参见：
+File, FileDescriptor, FileOutputStream
+
+--------------------------------------------------------------------------------
+
+构造方法摘要
+FileInputStream(File file)
+          通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的 File 对象 file 指定。
+FileInputStream(FileDescriptor fdObj)
+          通过使用文件描述符 fdObj 创建一个 FileInputStream，该文件描述符表示到文件系统中某个实际文件的现有连接。
+FileInputStream(String name)
+          通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的路径名 name 指定。
+  方法摘要
+ int available()
+          返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数。
+ void close()
+          关闭此文件输入流并释放与此流有关的所有系统资源。
+protected  void finalize()
+          确保在不再引用文件输入流时调用其 close 方法。
+ FileChannel getChannel()
+          返回与此文件输入流有关的唯一 FileChannel 对象。
+ FileDescriptor getFD()
+          返回表示到文件系统中实际文件的连接的 FileDescriptor 对象，该文件系统正被此 FileInputStream 使用。
+ int read()
+          从此输入流中读取一个数据字节。
+ int read(byte[] b)
+          从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中。
+ int read(byte[] b, int off, int len)
+          从此输入流中将最多 len 个字节的数据读入一个 byte 数组中。
+ long skip(long n)
+          从输入流中跳过并丢弃 n 个字节的数据。
+  从类 java.io.InputStream 继承的方法
+mark, markSupported, reset
+  从类 java.lang.Object 继承的方法
+clone, equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait
+
+
+构造方法详细信息
+
+
+FileInputStream
+public FileInputStream(String name)
+                throws FileNotFoundException通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的路径名 name 指定。创建一个新 FileDescriptor 对象来表示此文件连接。
+首先，如果有安全管理器，则用 name 作为参数调用其 checkRead 方法。
+
+如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException。
+
+
+参数：
+name - 与系统有关的文件名。
+抛出：
+FileNotFoundException - 如果该文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取。
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件进行读取访问。
+另请参见：
+SecurityManager.checkRead(java.lang.String)
+
+--------------------------------------------------------------------------------
+
+FileInputStream
+public FileInputStream(File file)
+                throws FileNotFoundException通过打开一个到实际文件的连接来创建一个 FileInputStream，该文件通过文件系统中的 File 对象 file 指定。创建一个新 FileDescriptor 对象来表示此文件连接。
+首先，如果有安全管理器，则用 file 参数表示的路径作为参数调用其 checkRead 方法。
+
+如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException。
+
+
+参数：
+file - 为了进行读取而打开的文件。
+抛出：
+FileNotFoundException - 如果该文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取。
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件进行读取访问。
+另请参见：
+File.getPath(), SecurityManager.checkRead(java.lang.String)
+
+--------------------------------------------------------------------------------
+
+FileInputStream
+public FileInputStream(FileDescriptor fdObj)通过使用文件描述符 fdObj 创建一个 FileInputStream，该文件描述符表示到文件系统中某个实际文件的现有连接。
+首先，如果有安全管理器，则用文件描述符 fdObj 作为参数调用其 checkRead 方法，以查看它是否可以读取该文件描述符。如果拒绝对该文件描述符进行读取访问，则抛出 SecurityException。
+
+如果 fdObj 为 null，则抛出 NullPointerException。
+
+
+参数：
+fdObj - 为了进行读取而打开的文件描述符。
+抛出：
+SecurityException - 如果存在安全管理器，且其 checkRead 方法拒绝对文件描述符进行读取访问
+另请参见：
+SecurityManager.checkRead(java.io.FileDescriptor)
+方法详细信息
+
+read
+public int read()
+         throws IOException从此输入流中读取一个数据字节。如果没有输入可用，则此方法将阻塞。
+
+指定者：
+类 InputStream 中的 read
+返回：
+下一个数据字节；如果已到达文件末尾，则返回 -1。
+抛出：
+IOException - 如果发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+read
+public int read(byte[] b)
+         throws IOException从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中。在某些输入可用之前，此方法将阻塞。
+
+覆盖：
+类 InputStream 中的 read
+参数：
+b - 存储读取数据的缓冲区。
+返回：
+读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+抛出：
+IOException - 如果发生 I/O 错误。
+另请参见：
+InputStream.read(byte[], int, int)
+
+--------------------------------------------------------------------------------
+
+read
+public int read(byte[] b,
+                int off,
+                int len)
+         throws IOException从此输入流中将最多 len 个字节的数据读入一个 byte 数组中。如果 len 不为 0，则在输入可用之前，该方法将阻塞；否则，不读取任何字节并返回 0。
+
+覆盖：
+类 InputStream 中的 read
+参数：
+b - 存储读取数据的缓冲区。
+off - 目标数组 b 中的起始偏移量。
+len - 读取的最大字节数。
+返回：
+读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+抛出：
+NullPointerException - 如果 b 为 null。
+IndexOutOfBoundsException - 如果 off 为负、len 为负，或者 len 大于 b.length - off
+IOException - 如果发生 I/O 错误。
+另请参见：
+InputStream.read()
+
+--------------------------------------------------------------------------------
+
+skip
+public long skip(long n)
+          throws IOException从输入流中跳过并丢弃 n 个字节的数据。
+出于各种原因，skip 方法最终跳过的字节数可能更少一些，甚至可能为 0。如果 n 为负，则抛出 IOException，即使 InputStream 超类的 skip 方法在这种情况下没有执行任何操作。返回实际跳过的字节数。
+
+此方法跳过的字节可能多于底层实现文件中剩余的字节。这不会产生异常，并且跳过的字节数可能包括底层实现文件的 EOF（文件结束符）之后的一些字节数。如果试图在跳过末尾之后读取流，那么会返回 -1（指示文件结束）。
+
+
+覆盖：
+类 InputStream 中的 skip
+参数：
+n - 要跳过的字节数。
+返回：
+实际跳过的字节数。
+抛出：
+IOException - 如果 n 为负，如果该流不支持查找操作，或者发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+available
+public int available()
+              throws IOException返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数。下一次调用可能是同一个线程，也可能是另一个线程。一次读取或跳过此数量个字节不会发生阻塞，但读取或跳过的字节可能小于该数。
+在某些情况下，非阻塞的读取（或跳过）操作在执行很慢时看起来受阻塞，例如，在网速缓慢的网络上读取大文件时。
+
+
+覆盖：
+类 InputStream 中的 available
+返回：
+可以不受阻塞地从此输入流中读取（或跳过）的估计剩余字节数。
+抛出：
+IOException - 如果此文件输入流已通过调用 close 关闭，或者发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+close
+public void close()
+           throws IOException关闭此文件输入流并释放与此流有关的所有系统资源。
+如果此流有一个与之关联的通道，则关闭该通道。
+
+
+指定者：
+接口 Closeable 中的 close
+覆盖：
+类 InputStream 中的 close
+抛出：
+IOException - 如果发生 I/O 错误。
+
+--------------------------------------------------------------------------------
+
+getFD
+public final FileDescriptor getFD()
+                           throws IOException返回表示到文件系统中实际文件的连接的 FileDescriptor 对象，该文件系统正被此 FileInputStream 使用。
+
+返回：
+与此流有关的文件描述符对象。
+抛出：
+IOException - 如果发生 I/O 错误。
+另请参见：
+FileDescriptor
+
+--------------------------------------------------------------------------------
+
+getChannel
+public FileChannel getChannel()返回与此文件输入流有关的唯一 FileChannel 对象。
+所返回通道的初始 position 将等于到目前为止从文件中读取的字节数。从此流中读取的字节会使通道的位置递增。显式地或通过读取来更改通道的位置会更改此流的文件位置。
+
+
+返回：
+与此文件输入流有关的文件通道
+从以下版本开始：
+1.4
+
+--------------------------------------------------------------------------------
+
+finalize
+protected void finalize()
+                 throws IOException确保在不再引用文件输入流时调用其 close 方法。
+
+覆盖：
+类 Object 中的 finalize
+抛出：
+IOException - 如果发生 I/O 错误。
+另请参见：
+close()
+
+--------------------------------------------------------------------------------
+概述  软件包   类  使用  树  已过时  索引  帮助
+ JavaTM Platform
+Standard Ed. 6
+ 上一个类   下一个类 框架    无框架
+摘要： 嵌套 | 字段 | 构造方法 | 方法 详细信息： 字段 | 构造方法 | 方法
+
+--------------------------------------------------------------------------------
+提交错误或意见
+有关更多的 API 参考资料和开发人员文档，请参阅 Java SE 开发人员文档。该文档包含更详细的、面向开发人员的描述，以及总体概述、术语定义、使用技巧和工作代码示例。
+版权所有 2007 Sun Microsystems, Inc. 保留所有权利。 请遵守许可证条款。另请参阅文档重新分发政策。

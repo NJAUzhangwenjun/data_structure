@@ -9,7 +9,7 @@ import java.util.Stack;
  * @version:1.0
  * @date 2019/9/211:19
  */
-public class LinkedList<E> {
+public class LinkedListMy<E> {
 
     /**
      * 头结点，不存放数据
@@ -60,8 +60,7 @@ public class LinkedList<E> {
         }
     }
 
-
-    public LinkedList() {
+    public LinkedListMy() {
         /**
          * 创建虚拟头结点
          */

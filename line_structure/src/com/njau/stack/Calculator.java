@@ -1,7 +1,7 @@
 package com.njau.stack;
 
 /**
- * @author 张文军 @Description:数组栈模拟计算器 * @Company:南京农业大学工学院
+ * @author 张文军 @Description:数组栈模拟逆波兰表达式（后缀表达式）计算器 * @Company:南京农业大学工学院
  * @version:1.0
  * @date 2019/9/311:12
  */
